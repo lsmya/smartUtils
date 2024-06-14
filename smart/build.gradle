@@ -2,13 +2,15 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.mavenPublish)
-    id 'kotlin-kapt'
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace 'cn.lsmya.smart'
     compileSdk 34
-
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         minSdk 24
 
@@ -39,7 +41,39 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+    //json解析
     implementation libs.converter.moshi
     implementation libs.gson
-    kapt libs.moshi.kotlin.codegen
+    ksp libs.moshi.kotlin.codegen
+    //沉浸式框架
+    implementation libs.immersionbar
+    implementation libs.immersionbar.ktx
+    //弹窗（https://github.com/li-xiaojun/XPopup）
+    implementation libs.xpopup
+    //图片选择（https://github.com/lucksiege/pictureselector）
+    implementation libs.pictureselector
+    implementation libs.pictureselector.compress
+    implementation libs.pictureselector.ucrop
+    implementation libs.pictureselector.camerax
+    //图片加载（https://github.com/coil-kt/coil/blob/main/README-zh.md）
+    implementation libs.coil
+    implementation libs.coil.svg
+    //kotlin携程
+    implementation libs.jetbrains.kotlinx.coroutines.core
+    implementation libs.jetbrains.kotlinx.coroutines.android
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    //智能刷新
+    implementation libs.refresh.layout.kernel
+    //权限申请（https://github.com/guolindev/PermissionX）
+    implementation libs.com.guolindev.permissionx.permissionx
+    //货拉拉路由框架（https://github.com/HuolalaTech/hll-wp-therouter-android、https://therouter.cn/doc）
+    implementation libs.therouter
+    ksp libs.therouter.apt
+//    //mvvm
+//    implementation libs.koin.core
+//    implementation libs.koin.android
+    //BRVAH（https://github.com/CymChad/BaseRecyclerViewAdapterHelper）
+    implementation libs.brvah
+    //https://github.com/greenrobot/EventBus
+    implementation libs.greenrobot.eventbus
 }

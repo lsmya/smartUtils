@@ -1,6 +1,19 @@
 [versions]
 agp = "8.3.1"
+brvah = "4.1.0"
+eventbusVersion = "3.3.1"
+koinAndroid = "3.2.0"
+koinAnnotations = "1.2.0"
+koinCore = "3.2.0"
+koinKspCompiler = "1.2.0"
+therouterApt = "1.2.1"
+coil = "2.5.0"
+guolindevPermissionx = "1.7.1"
+kotlinxCoroutinesAndroidVersion = "1.7.3"
+kotlinxCoroutinesCoreVersion = "1.7.3"
+lifecycleViewmodelKtx = "2.6.2"
 mavenPublish = "0.28.0"
+ksp = "1.9.0-1.0.13"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -11,11 +24,30 @@ material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 converterMoshi = "3.2.0"
-moshiKotlinCodegen = "1.14.0"
-gson = "2.8.9"
+moshiKotlinCodegen = "1.15.0"
+gson = "2.10.1"
+immersionbar = "3.2.2"
+refreshLayoutKernel = "2.1.0"
+therouter = "1.2.1"
+xpopup = "2.9.19"
+pictureselector = "v3.11.2"
+pictureselectorOther = "v3.10.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+brvah = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "brvah" }
+greenrobot-eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbusVersion" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinKspCompiler" }
+therouter-apt = { module = "cn.therouter:apt", version.ref = "therouterApt" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
+com-guolindev-permissionx-permissionx = { module = "com.guolindev.permissionx:permissionx", version.ref = "guolindevPermissionx" }
+jetbrains-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
+jetbrains-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCoreVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -26,6 +58,15 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 converter-moshi = { group = "com.github.liujingxing.rxhttp", name = "converter-moshi", version.ref = "converterMoshi" }
 moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+immersionbar = { group = "com.geyifeng.immersionbar", name = "immersionbar", version.ref = "immersionbar" }
+immersionbar-ktx = { group = "com.geyifeng.immersionbar", name = "immersionbar-ktx", version.ref = "immersionbar" }
+refresh-layout-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refreshLayoutKernel" }
+therouter = { module = "cn.therouter:router", version.ref = "therouter" }
+xpopup = { group = "com.github.li-xiaojun", name = "XPopup", version.ref = "xpopup" }
+pictureselector = { group = "io.github.lucksiege", name = "pictureselector", version.ref = "pictureselector" }
+pictureselector-compress = { group = "io.github.lucksiege", name = "compress", version.ref = "pictureselectorOther" }
+pictureselector-ucrop = { group = "io.github.lucksiege", name = "ucrop", version.ref = "pictureselectorOther" }
+pictureselector-camerax = { group = "io.github.lucksiege", name = "camerax", version.ref = "pictureselectorOther" }
 
 
 
@@ -34,4 +75,5 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

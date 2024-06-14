@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoadingView">
+        <attr name="loading_size" format="dimension" />
+        <attr name="loading_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="VerificationCodeInputText">
+        <attr name="android:textColor" format="color" />
+        <attr name="codeNumber" format="integer" />
+        <attr name="boxHeight" format="dimension" />
+        <attr name="verticalPadding" format="dimension" />
+        <attr name="horizontalPadding" format="dimension" />
+        <attr name="colorControlNormalDrawable" format="reference" />
+        <attr name="colorControlActivatedDrawable" format="reference" />
+        <attr name="boxInputType">
+            <enum name="number" value="0" />
+            <enum name="text" value="1" />
+            <enum name="password" value="2" />
+            <enum name="phone" value="3" />
+        </attr>
+    </declare-styleable>
+</resources>
