@@ -69,11 +69,8 @@ dependencies {
     //货拉拉路由框架（https://github.com/HuolalaTech/hll-wp-therouter-android、https://therouter.cn/doc）
     implementation libs.therouter
     ksp libs.therouter.apt
-//    //mvvm
-//    implementation libs.koin.core
-//    implementation libs.koin.android
     //BRVAH（https://github.com/CymChad/BaseRecyclerViewAdapterHelper）
-    implementation libs.brvah
+    compileOnly(libs.brvah)
     //https://github.com/greenrobot/EventBus
     implementation libs.greenrobot.eventbus
 }
