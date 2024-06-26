@@ -6,27 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import cn.lsmya.smart.base.BaseFragment
-import java.lang.reflect.Method
-import java.lang.reflect.ParameterizedType
+import cn.lsmya.smart.utils.getBindingType
 
 abstract class BaseVBFragment<VB : ViewBinding> : BaseFragment() {
 
     private var viewBinding: VB? = null
+    override fun initUI() {
 
-    private val inflateMethod: Method
+    }
 
-    init {
-        //获取泛型参数化类型信息
-        val parameterizedType = javaClass.genericSuperclass as ParameterizedType
-        //由BaseViewBindingFragment<VB : ViewBinding>可知只有一个参数类型
-        val clazz = parameterizedType.actualTypeArguments.first() as Class<*>
-        //获取ViewBinding实现类中的inflate方法，如下：
-        inflateMethod = clazz.getMethod(
-            "inflate",
-            LayoutInflater::class.java,
-            ViewGroup::class.java,
-            Boolean::class.java
-        )
+    override fun initData() {
     }
 
     override fun onCreateView(
@@ -34,9 +23,13 @@ abstract class BaseVBFragment<VB : ViewBinding> : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //获取viewBinding
-        viewBinding = inflateMethod.invoke(null, inflater, container, false) as VB
+        viewBinding = createDataBinding(inflater, container)
         return viewBinding?.root
+    }
+    private fun createDataBinding(inflater: LayoutInflater, container: ViewGroup?): VB {
+        return getBindingType(javaClass)// 获取泛型类型
+            ?.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java) // 反射获取 inflate 方法
+            ?.invoke(null, inflater, container, false) as VB // 通过反射调用 inflate 方法
     }
 
     fun getBinding(): VB? {

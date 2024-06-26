@@ -1,19 +1,14 @@
 package cn.lsmya.smart.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import cn.lsmya.smart.extension.postEvent
 import cn.lsmya.smart.extension.request
 import cn.lsmya.smart.model.ToastModel
 import com.lxj.xpopup.XPopup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import java.lang.reflect.Method
-import java.lang.reflect.ParameterizedType
 import java.net.SocketTimeoutException
 
 

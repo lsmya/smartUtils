@@ -21,7 +21,6 @@ public class WifiUtil {
         this.context = context;
     }
 
-    // TODO: 2021/9/15 获取本机WIFI设备详细信息
     @SuppressLint("MissingPermission")
     public void getDetailsWifiInfo() {
         StringBuffer sInfo = new StringBuffer();

@@ -13,7 +13,7 @@ import com.luck.picture.lib.engine.CropFileEngine
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropImageEngine
 
-class ImageFileCropEngine : CropFileEngine {
+internal class ImageFileCropEngine : CropFileEngine {
     override fun onStartCrop(
         fragment: Fragment?,
         srcUri: Uri?,

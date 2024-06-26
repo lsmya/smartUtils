@@ -1,15 +1,15 @@
 package cn.lsmya.smartutils
 
-import cn.lsmya.smart.base.BaseActivity
+import cn.lsmya.smart.vb.BaseVBActivity
+import cn.lsmya.smartutils.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseVBActivity<ActivityMainBinding>() {
     override fun onInitUiBefore() {
         super.onInitUiBefore()
-        setContentView(R.layout.activity_main)
     }
 
     override fun initUI() {
-
+        supportFragmentManager.beginTransaction().replace(R.id.main, MainFragment()).commit()
     }
 
     override fun initData() {

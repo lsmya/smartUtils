@@ -37,10 +37,6 @@ class WebActivity : BaseVBActivity<ActivityWebBinding>() {
         }
     }
 
-    override fun createViewBinding(): ActivityWebBinding {
-        return ActivityWebBinding.inflate(layoutInflater)
-    }
-
     private val title by intentExtras("title", "")
     private val url by intentExtras("url", "")
 

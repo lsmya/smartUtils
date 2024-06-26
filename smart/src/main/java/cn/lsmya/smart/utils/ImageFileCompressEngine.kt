@@ -1,63 +1,42 @@
-package cn.lsmya.smart.utils;
+package cn.lsmya.smart.utils
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Context
+import android.net.Uri
+import com.luck.picture.lib.config.PictureMimeType
+import com.luck.picture.lib.engine.CompressFileEngine
+import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener
+import com.luck.picture.lib.utils.DateUtils
+import top.zibin.luban.Luban
+import top.zibin.luban.OnNewCompressListener
+import java.io.File
 
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.engine.CompressFileEngine;
-import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener;
-import com.luck.picture.lib.utils.DateUtils;
-
-import java.io.File;
-import java.util.ArrayList;
-
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnNewCompressListener;
-import top.zibin.luban.OnRenameListener;
-
-/**
- * 自定义压缩
- */
-public class ImageFileCompressEngine implements CompressFileEngine {
-
-    @Override
-    public void onStartCompress(Context context, ArrayList<Uri> source, OnKeyValueResultCallbackListener call) {
-        Luban.with(context).load(source).ignoreBy(100).setRenameListener(new OnRenameListener() {
-            @Override
-            public String rename(String filePath) {
-                int indexOf = filePath.lastIndexOf(".");
-                String postfix = indexOf != -1 ? filePath.substring(indexOf) : ".jpg";
-                return DateUtils.getCreateFileName("CMP_") + postfix;
+internal class ImageFileCompressEngine: CompressFileEngine {
+    override fun onStartCompress(
+        context: Context?,
+        source: ArrayList<Uri>?,
+        call: OnKeyValueResultCallbackListener?
+    ) {
+        Luban.with(context).load(source).ignoreBy(100).setRenameListener { filePath: String ->
+            val indexOf = filePath.lastIndexOf(".")
+            val postfix =
+                if (indexOf != -1) filePath.substring(indexOf) else ".jpg"
+            DateUtils.getCreateFileName("CMP_") + postfix
+        }.filter { path: String? ->
+            if (PictureMimeType.isUrlHasImage(path) && !PictureMimeType.isHasHttp(path)) {
+                return@filter true
             }
-        }).filter(new CompressionPredicate() {
-            @Override
-            public boolean apply(String path) {
-                if (PictureMimeType.isUrlHasImage(path) && !PictureMimeType.isHasHttp(path)) {
-                    return true;
-                }
-                return !PictureMimeType.isUrlHasGif(path);
-            }
-        }).setCompressListener(new OnNewCompressListener() {
-            @Override
-            public void onStart() {
-
+            !PictureMimeType.isUrlHasGif(path)
+        }.setCompressListener(object : OnNewCompressListener {
+            override fun onStart() {
             }
 
-            @Override
-            public void onSuccess(String source, File compressFile) {
-                if (call != null) {
-                    call.onCallback(source, compressFile.getAbsolutePath());
-                }
+            override fun onSuccess(source: String, compressFile: File) {
+                call?.onCallback(source, compressFile.absolutePath)
             }
 
-            @Override
-            public void onError(String source, Throwable e) {
-                if (call != null) {
-                    call.onCallback(source, null);
-                }
+            override fun onError(source: String, e: Throwable) {
+                call?.onCallback(source, null)
             }
-        }).launch();
+        }).launch()
     }
 }
-

@@ -1,6 +1,6 @@
 package cn.lsmya.smart.base
 
-interface BaseInterface {
+internal interface BaseInterface {
     fun initUI()
     fun initData()
 }

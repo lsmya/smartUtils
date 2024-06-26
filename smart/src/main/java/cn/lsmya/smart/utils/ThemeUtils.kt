@@ -1,4 +1,4 @@
-package com.xskj.common.utils
+package cn.lsmya.smart.utils
 
 import android.content.Context
 import android.content.res.Configuration

@@ -14,7 +14,7 @@ import com.luck.picture.lib.utils.ActivityCompatHelper
  * @date：2022/2/14 3:00 下午
  * @describe：CoilEngine
  */
-class CoilEngine : ImageEngine {
+internal class CoilEngine : ImageEngine {
     override fun loadImage(context: Context, url: String, imageView: ImageView) {
         if (!ActivityCompatHelper.assertValidRequest(context)) {
             return
