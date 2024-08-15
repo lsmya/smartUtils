@@ -3,6 +3,14 @@
     package="cn.lsmya.smart">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <queries package="${applicationId}">
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+        </intent>
+    </queries>
     <application>
         <activity
             android:name=".base.WebActivity"

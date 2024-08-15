@@ -8,6 +8,12 @@ import cn.lsmya.smart.utils.getBindingType
 abstract class BaseVBActivity<VB : ViewBinding> : BaseActivity() {
 
     private var binding: VB? = null
+    override fun initUI() {
+    }
+
+    override fun initData() {
+    }
+
     fun getBinding(): VB {
         if (binding == null) {
             binding = createDataBinding()

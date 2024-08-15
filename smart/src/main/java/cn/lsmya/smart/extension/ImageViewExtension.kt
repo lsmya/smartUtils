@@ -10,8 +10,8 @@ import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 
 fun ImageView?.loadUrl(
-    baseUrl: String? = null,
     imageUrl: String?,
+    baseUrl: String? = null,
     placeholder: Drawable? = null,
     error: Drawable? = null,
     isCircle: Boolean? = null,
