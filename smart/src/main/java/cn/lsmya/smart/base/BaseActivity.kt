@@ -3,6 +3,7 @@ package cn.lsmya.smart.base
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +21,7 @@ import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
 import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.util.SmartGlideImageLoader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import java.net.SocketTimeoutException
@@ -273,5 +275,21 @@ abstract class BaseActivity : AppCompatActivity(), BaseInterface {
                 null
             } else onFinally
         )
+    }
+
+    /**
+     * 上传文件显示大图
+     */
+    fun showBigImage(position: Int, view: ImageView?, images: List<String>?) {
+        XPopup.Builder(this)
+            .isDestroyOnDismiss(true)
+            .asImageViewer(
+                view,
+                position,
+                images,
+                null,
+                SmartGlideImageLoader()
+            )
+            .show()
     }
 }
