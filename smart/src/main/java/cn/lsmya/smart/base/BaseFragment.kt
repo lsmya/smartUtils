@@ -3,9 +3,8 @@ package cn.lsmya.smart.base
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import cn.lsmya.smart.extension.postEvent
 import cn.lsmya.smart.extension.request
-import cn.lsmya.smart.model.ToastModel
+import cn.lsmya.smart.extension.toast
 import com.lxj.xpopup.XPopup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -119,9 +118,9 @@ abstract class BaseFragment : Fragment(), BaseInterface {
                 if (showToast) {
                     it.message?.let { msg ->
                         if (it is SocketTimeoutException) {
-                            ToastModel("网络连接超时").postEvent()
+                            context?.toast("网络连接超时")
                         } else {
-                            ToastModel(msg).postEvent()
+                            context?.toast(msg)
                         }
                     }
                 }

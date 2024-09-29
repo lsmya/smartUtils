@@ -10,9 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import cn.lsmya.smart.extension.callback
-import cn.lsmya.smart.extension.postEvent
 import cn.lsmya.smart.extension.request
-import cn.lsmya.smart.model.ToastModel
+import cn.lsmya.smart.extension.toast
 import cn.lsmya.smart.utils.CoilEngine
 import cn.lsmya.smart.utils.ImageFileCompressEngine
 import cn.lsmya.smart.utils.ImageFileCropEngine
@@ -254,9 +253,9 @@ abstract class BaseActivity : AppCompatActivity(), BaseInterface {
                 if (showToast) {
                     it.message?.let { msg ->
                         if (it is SocketTimeoutException) {
-                            ToastModel("网络连接超时").postEvent()
+                            toast("网络连接超时")
                         } else {
-                            ToastModel(msg).postEvent()
+                            toast(msg)
                         }
                     }
                 }
