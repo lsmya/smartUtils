@@ -65,7 +65,7 @@ abstract class BaseFragment : Fragment(), BaseInterface {
         callback: ((String) -> Unit)? = null,
     ) {
         if (requireActivity() is BaseActivity)
-            (requireActivity() as BaseActivity)?.selectSingleVideo(
+            (requireActivity() as BaseActivity).selectSingleVideo(
                 cancel = cancel,
                 callback = callback
             )
