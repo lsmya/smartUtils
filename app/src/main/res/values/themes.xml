@@ -2,9 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SmartUtils" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-<!--         <item name="colorPrimary">#f00</item>-->
-<!--         <item name="android:startColor">#f00</item>-->
+        <!--         <item name="colorPrimary">#f00</item>-->
+        <!--         <item name="android:startColor">#f00</item>-->
     </style>
 
-    <style name="Theme.SmartUtils" parent="Base.Theme.SmartUtils" />
+    <style name="Theme.SmartUtils" parent="Base.Theme.SmartUtils">
+        <item name="android:windowAnimationStyle">@style/AnimationActivityTopDown</item>
+    </style>
 </resources>

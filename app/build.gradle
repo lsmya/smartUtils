@@ -55,6 +55,20 @@ dependencies {
     implementation libs.koin.core
     implementation libs.koin.android
     implementation(libs.koin.annotations)
+    implementation(libs.refresh.layout.kernel)
+    implementation(libs.refresh.header.classics)
+    implementation(libs.refresh.footer.classics)
     ksp(libs.koin.ksp.compiler)
+
+
+    //网络请求（https://github.com/liujingxing/rxhttp）
+    implementation(libs.okhttp)
+    implementation(libs.github.rxhttp)
+    implementation(libs.rxhttp.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.rxhttp.compiler)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.baserecyclerviewadapterhelper4)
+    implementation(libs.xpopup)
 
 }

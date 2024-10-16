@@ -11,3 +11,16 @@ fun ComponentActivity.registerForActivityResult(callback: ActivityResultCallback
 
 fun Fragment.registerForActivityResult(callback: ActivityResultCallback<ActivityResult>) =
     registerForActivityResult(ActivityResultContracts.StartActivityForResult(), callback)
+
+
+fun ComponentActivity.registerForPermissionsResult(callback: ActivityResultCallback<Boolean>) =
+    registerForActivityResult(ActivityResultContracts.RequestPermission(), callback)
+
+fun Fragment.registerForPermissionsResult(callback: ActivityResultCallback<Boolean>) =
+    registerForActivityResult(ActivityResultContracts.RequestPermission(), callback)
+
+fun ComponentActivity.registerForMultiplePermissionsResult(callback: ActivityResultCallback<Map<String, Boolean>>) =
+    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions(), callback)
+
+fun Fragment.registerForMultiplePermissionsResult(callback: ActivityResultCallback<Map<String, Boolean>>) =
+    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions(), callback)
