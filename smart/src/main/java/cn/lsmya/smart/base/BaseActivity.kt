@@ -4,29 +4,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
-import cn.lsmya.smart.extension.callback
-import cn.lsmya.smart.extension.request
-import cn.lsmya.smart.extension.toast
-import cn.lsmya.smart.utils.CoilEngine
-import cn.lsmya.smart.utils.ImageFileCompressEngine
-import cn.lsmya.smart.utils.ImageFileCropEngine
+import cn.lsmya.smart.ktx.launch
 import com.google.android.material.appbar.MaterialToolbar
-import com.luck.picture.lib.basic.PictureSelector
-import com.luck.picture.lib.config.SelectMimeType
-import com.luck.picture.lib.config.SelectModeConfig
 import com.lxj.xpopup.XPopup
-import com.lxj.xpopup.util.SmartGlideImageLoader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import java.net.SocketTimeoutException
 
 
 abstract class BaseActivity : AppCompatActivity(), BaseInterface {
@@ -80,6 +67,9 @@ abstract class BaseActivity : AppCompatActivity(), BaseInterface {
         toolbar?.setNavigationOnClickListener { onNavigationOnClickListener() }
     }
 
+    /**
+     * 设置沉浸式状态栏
+     */
     private fun initStatusBar() {
         val rootView = window.decorView.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
         //设置状态栏字体颜色
@@ -174,165 +164,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseInterface {
      */
     protected open fun keyboardEnable(): Boolean {
         return true
-    }
-
-    /**
-     * 选择视频(单选)
-     */
-    fun openCamera(
-        cancel: (() -> Unit)? = null,
-        callback: ((String) -> Unit)? = null,
-    ) {
-        PictureSelector.create(this)
-            .openCamera(SelectMimeType.ofImage())
-            .callback(cancel = cancel, callback = {
-                if (it.isNotEmpty()) {
-                    callback?.invoke(it[0])
-                }
-            })
-    }
-
-    /**
-     * 选择图片(单选)
-     */
-    fun selectSingleImage(
-        cancel: (() -> Unit)? = null,
-        callback: ((String) -> Unit)? = null,
-    ) {
-        pictureSelector(
-            chooseMode = SelectMimeType.ofImage(),
-            selectionMode = SelectModeConfig.SINGLE,
-            cancel = cancel,
-            callback = {
-                if (it.isNotEmpty()) {
-                    callback?.invoke(it[0])
-                }
-            })
-    }
-
-    /**
-     * 选择视频(单选)
-     */
-    fun selectSingleVideo(
-        cancel: (() -> Unit)? = null,
-        callback: ((String) -> Unit)? = null,
-    ) {
-        pictureSelector(
-            chooseMode = SelectMimeType.ofVideo(),
-            selectionMode = SelectModeConfig.SINGLE,
-            cancel = cancel,
-            callback = {
-                if (it.isNotEmpty()) {
-                    callback?.invoke(it[0])
-                }
-            })
-    }
-
-    /**
-     * 选择图片(多选)
-     */
-    fun selectMultipleImage(
-        cancel: (() -> Unit)? = null,
-        callback: ((ArrayList<String>) -> Unit)
-    ) {
-        pictureSelector(
-            chooseMode = SelectMimeType.ofImage(),
-            selectionMode = SelectModeConfig.MULTIPLE,
-            cancel = cancel,
-            callback = callback,
-        )
-    }
-
-    /**
-     * 选择视频(多选)
-     */
-    fun selectMultipleVideo(
-        cancel: (() -> Unit)? = null,
-        callback: ((ArrayList<String>) -> Unit)
-    ) {
-        pictureSelector(
-            chooseMode = SelectMimeType.ofVideo(),
-            selectionMode = SelectModeConfig.SINGLE,
-            cancel = cancel,
-            callback = callback
-        )
-    }
-
-    /**
-     * 选择图片、视频（可多选）
-     */
-    private fun pictureSelector(
-        chooseMode: Int,
-        selectionMode: Int,
-        cancel: (() -> Unit)? = null,
-        callback: ((ArrayList<String>) -> Unit)? = null,
-    ) {
-        PictureSelector.create(this)
-            .openGallery(chooseMode)
-            .setSelectionMode(selectionMode)
-            .setImageEngine(CoilEngine())
-            .isDirectReturnSingle(true)
-            .setCropEngine(ImageFileCropEngine())
-            .setCompressEngine(ImageFileCompressEngine())
-            .callback(cancel = cancel, callback = callback)
-    }
-
-    fun launch(
-        block: suspend CoroutineScope.() -> Unit,
-    ): Job {
-        return launch(block = block, showToast = true)
-    }
-
-    fun launch(
-        block: suspend CoroutineScope.() -> Unit,
-        onError: ((Throwable) -> Unit)? = null,
-        onStart: (() -> Unit)? = null,
-        onFinally: (() -> Unit)? = null,
-        showToast: Boolean = true
-    ): Job {
-        return request(
-            block = block,
-            onError = {
-                if (showToast) {
-                    it.message?.let { msg ->
-                        if (it is SocketTimeoutException) {
-                            toast("网络连接超时")
-                        } else {
-                            toast(msg)
-                        }
-                    }
-                }
-                onError?.invoke(it)
-            },
-            onStart =
-            if (onStart == null) {
-                showLoading()
-                null
-            } else {
-                onStart
-            },
-            onFinally =
-            if (onFinally == null) {
-                hideLoading()
-                null
-            } else onFinally
-        )
-    }
-
-    /**
-     * 上传文件显示大图
-     */
-    fun showBigImage(position: Int, view: ImageView?, images: List<String>?) {
-        XPopup.Builder(this)
-            .isDestroyOnDismiss(true)
-            .asImageViewer(
-                view,
-                position,
-                images,
-                null,
-                SmartGlideImageLoader()
-            )
-            .show()
     }
 
     fun <T> getList(

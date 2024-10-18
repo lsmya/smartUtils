@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 import android.graphics.drawable.Drawable
 import android.util.Base64

@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 import com.google.gson.Gson
 import com.squareup.moshi.*
@@ -119,7 +119,7 @@ private abstract class MoshiArrayListJsonAdapter<C : MutableCollection<T>?, T> p
 
     companion object {
         val FACTORY = Factory { type, annotations, moshi ->
-            val rawType = com.squareup.moshi.Types.getRawType(type)
+            val rawType = Types.getRawType(type)
             if (annotations.isNotEmpty()) return@Factory null
             if (rawType == ArrayList::class.java) {
                 return@Factory newArrayListAdapter<Any>(

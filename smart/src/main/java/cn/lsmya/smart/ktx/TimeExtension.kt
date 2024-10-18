@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 import android.os.Build
 import androidx.annotation.RequiresApi

@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResult

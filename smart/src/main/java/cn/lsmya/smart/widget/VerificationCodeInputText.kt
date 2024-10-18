@@ -19,7 +19,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.widget.doAfterTextChanged
 import cn.lsmya.smart.R
-import cn.lsmya.smart.extension.isNotNullOrEmpty
+import cn.lsmya.smart.ktx.isNotNullOrEmpty
 import com.lxj.xpopup.util.XPopupUtils.dp2px
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

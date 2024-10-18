@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope

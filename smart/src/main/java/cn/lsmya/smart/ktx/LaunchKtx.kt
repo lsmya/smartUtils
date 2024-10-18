@@ -1,39 +1,22 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import cn.lsmya.smart.SmartSdkConfig
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-/**
- * 协程
- */
-
-//异步操作
-fun async(block: suspend () -> Unit): Job {
-    return GlobalScope.launch {
-        block.invoke()
-    }
+fun Fragment.launch(
+    block: suspend CoroutineScope.() -> Unit,
+): Job {
+    return launch(block = block, onError = null, onStart = null, onFinally = null)
 }
 
-fun FragmentActivity.ui(block: () -> Unit) {
-    runOnUiThread(block)
-}
-
-fun Fragment.ui(block: () -> Unit) {
-    activity?.ui(block)
-}
-
-fun Fragment.request(
+fun Fragment.launch(
     block: suspend CoroutineScope.() -> Unit,
     onError: ((Throwable) -> Unit)? = null,
     onStart: (() -> Unit)? = null,
@@ -46,21 +29,24 @@ fun Fragment.request(
                 block()
             }
         } catch (e: Throwable) {
-            if (onError != null && isActive) {
-                try {
-                    onError(e)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            } else {
-                e.printStackTrace()
+            if (isActive) {
+                onError?.invoke(e)
+                SmartSdkConfig.getCoroutineExceptionHandler()
+                    ?.handleException(this.coroutineContext, e)
             }
         } finally {
             onFinally?.invoke()
         }
     }
 }
-fun FragmentActivity.request(
+
+fun FragmentActivity.launch(
+    block: suspend CoroutineScope.() -> Unit,
+): Job {
+    return launch(block = block, onError = null, onStart = null, onFinally = null)
+}
+
+fun FragmentActivity.launch(
     block: suspend CoroutineScope.() -> Unit,
     onError: ((Throwable) -> Unit)? = null,
     onStart: (() -> Unit)? = null,

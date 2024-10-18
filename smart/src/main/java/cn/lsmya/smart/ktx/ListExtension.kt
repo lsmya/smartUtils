@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 public inline fun <T> Iterable<T>.containsField(predicate: (T) -> Boolean): Boolean {
     return !this.filter(predicate).isNullOrEmpty()

@@ -12,7 +12,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import cn.lsmya.smart.databinding.ActivityWebBinding
-import cn.lsmya.smart.extension.intentExtras
+import cn.lsmya.smart.ktx.intentExtras
 import cn.lsmya.smart.vb.BaseVBActivity
 
 class WebActivity : BaseVBActivity<ActivityWebBinding>() {

@@ -6,8 +6,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import cn.lsmya.smart.extension.postEvent
-import cn.lsmya.smart.extension.toast
+import cn.lsmya.smart.ktx.postEvent
+import cn.lsmya.smart.ktx.toast
 import cn.lsmya.smart.model.ToastModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

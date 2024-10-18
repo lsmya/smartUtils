@@ -1,7 +1,7 @@
 package cn.lsmya.smartutils
 
 import android.app.Application
-import cn.lsmya.smart.extension.moshi
+import cn.lsmya.smart.ktx.moshi
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout

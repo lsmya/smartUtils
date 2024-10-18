@@ -1,4 +1,4 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
 public fun CharSequence?.isNotNullOrEmpty(): Boolean {
     return !this.isNullOrEmpty()

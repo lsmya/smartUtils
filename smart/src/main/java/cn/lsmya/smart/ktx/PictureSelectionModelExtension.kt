@@ -1,5 +1,6 @@
-package cn.lsmya.smart.extension
+package cn.lsmya.smart.ktx
 
+import android.content.Context
 import android.net.Uri
 import cn.lsmya.smart.utils.ImageUriPathUtil
 import com.luck.picture.lib.basic.PictureSelectionCameraModel
@@ -7,9 +8,9 @@ import com.luck.picture.lib.basic.PictureSelectionModel
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
-import com.therouter.getApplicationContext
 
-fun PictureSelectionModel.callback(
+internal fun PictureSelectionModel.callback(
+    context: Context,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit)? = null,
 ) {
@@ -24,8 +25,7 @@ fun PictureSelectionModel.callback(
                             list.add(filePath)
                         } else {
                             val uri = Uri.parse(filePath)
-                            val path =
-                                ImageUriPathUtil.getPathFromUri(getApplicationContext(), uri)
+                            val path = ImageUriPathUtil.getPathFromUri(context, uri)
                             list.add(path)
                         }
                     } else {
@@ -43,7 +43,8 @@ fun PictureSelectionModel.callback(
     })
 }
 
-fun PictureSelectionCameraModel.callback(
+internal fun PictureSelectionCameraModel.callback(
+    context: Context,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit)? = null,
 ) {
@@ -59,7 +60,7 @@ fun PictureSelectionCameraModel.callback(
                         } else {
                             val uri = Uri.parse(filePath)
                             val path =
-                                ImageUriPathUtil.getPathFromUri(getApplicationContext(), uri)
+                                ImageUriPathUtil.getPathFromUri(context, uri)
                             list.add(path)
                         }
                     } else {

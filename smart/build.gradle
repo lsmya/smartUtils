@@ -34,20 +34,15 @@ android {
 }
 
 dependencies {
-
-    implementation libs.androidx.core.ktx
-    implementation libs.androidx.appcompat
-    implementation libs.material
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+
+    implementation libs.androidx.appcompat
+    implementation libs.material
     //json解析
     implementation libs.converter.moshi
-    implementation libs.gson
     ksp libs.moshi.kotlin.codegen
-    //沉浸式框架
-    implementation libs.immersionbar
-    implementation libs.immersionbar.ktx
     //弹窗（https://github.com/li-xiaojun/XPopup）
     implementation libs.xpopup
     //图片选择（https://github.com/lucksiege/pictureselector）
@@ -61,16 +56,8 @@ dependencies {
     //kotlin携程
     implementation libs.jetbrains.kotlinx.coroutines.core
     implementation libs.jetbrains.kotlinx.coroutines.android
-    implementation libs.androidx.lifecycle.viewmodel.ktx
     //智能刷新
     implementation libs.refresh.layout.kernel
-    //权限申请（https://github.com/guolindev/PermissionX）
-    implementation libs.com.guolindev.permissionx.permissionx
-    //货拉拉路由框架（https://github.com/HuolalaTech/hll-wp-therouter-android、https://therouter.cn/doc）
-    implementation libs.therouter
-    ksp libs.therouter.apt
-    //BRVAH（https://github.com/CymChad/BaseRecyclerViewAdapterHelper）
-    compileOnly(libs.brvah)
     //https://github.com/greenrobot/EventBus
     implementation libs.greenrobot.eventbus
 }
