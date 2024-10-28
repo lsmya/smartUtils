@@ -1,10 +1,12 @@
 package cn.lsmya.smartutils
 
 import android.app.Application
+import cn.lsmya.smart.SmartSdkConfig
 import cn.lsmya.smart.ktx.moshi
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import kotlinx.coroutines.CoroutineExceptionHandler
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -43,6 +45,11 @@ class MyApp : Application() {
             modules(appModule, AppModule().module)
         }
         initNetwork()
+        SmartSdkConfig.setCoroutineExceptionHandler(mCoroutineExceptionHandler)
+    }
+
+    private val mCoroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        exception.printStackTrace()
     }
 
     /**

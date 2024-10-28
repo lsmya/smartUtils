@@ -72,4 +72,6 @@ dependencies {
     implementation(libs.baserecyclerviewadapterhelper4)
     implementation(libs.xpopup)
 
+    implementation("io.lindstrom:m3u8-parser:0.28")
+
 }

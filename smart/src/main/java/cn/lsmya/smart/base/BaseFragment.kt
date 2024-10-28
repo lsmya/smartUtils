@@ -2,11 +2,10 @@ package cn.lsmya.smart.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.lxj.xpopup.XPopup
 
 
-abstract class BaseFragment : Fragment(), BaseInterface {
+abstract class BaseFragment : VisibilityFragment(), BaseInterface, IFragmentVisibility {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

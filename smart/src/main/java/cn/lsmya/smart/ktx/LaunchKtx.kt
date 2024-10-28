@@ -59,9 +59,11 @@ fun FragmentActivity.launch(
                 block()
             }
         } catch (e: Throwable) {
-            if (onError != null && isActive) {
+            if (isActive) {
                 try {
-                    onError(e)
+                    onError?.invoke(e)
+                    SmartSdkConfig.getCoroutineExceptionHandler()
+                        ?.handleException(this.coroutineContext, e)
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }
