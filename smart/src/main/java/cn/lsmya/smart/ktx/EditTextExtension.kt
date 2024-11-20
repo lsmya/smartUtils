@@ -21,3 +21,14 @@ fun EditText.hidePassword() {
 }
 
 fun EditText.value() = this.text.toString()
+
+fun EditText?.switchPassword() {
+    if (this == null) {
+        return
+    }
+    if (this.transformationMethod is HideReturnsTransformationMethod) {
+        this.hidePassword()
+    } else if (this.transformationMethod is PasswordTransformationMethod) {
+        this.showPassword()
+    }
+}
