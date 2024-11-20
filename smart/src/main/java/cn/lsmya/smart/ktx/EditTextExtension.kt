@@ -21,5 +21,3 @@ fun EditText.hidePassword() {
 }
 
 fun EditText.value() = this.text.toString()
-
-fun EditText.length() = this.text().length
