@@ -51,3 +51,13 @@ fun String?.isChinese(): Boolean {
     val m = p.matcher(this)
     return m.find()
 }
+
+/**
+ * 验证手机号码
+ */
+fun String?.checkPhoneNumber(): Boolean {
+    if (this.isNullOrEmpty()) return false
+    val pattern = Pattern.compile("^1[0-9]{10}$")
+    val matcher = pattern.matcher(this)
+    return matcher.matches()
+}
