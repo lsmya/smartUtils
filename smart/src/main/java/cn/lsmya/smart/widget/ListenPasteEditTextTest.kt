@@ -7,16 +7,14 @@ import androidx.appcompat.widget.AppCompatEditText
 /**
  * 实现了粘贴事件监听回调的 EditText
  */
-open class ListenPasteEditTextTest : AppCompatEditText {
+open class ListenPasteEditTextTest @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null
+) : AppCompatEditText(context, attrs) {
 
-    constructor(context: Context): super(context)
-    constructor(context: Context, attributeSet: AttributeSet): super(context,attributeSet)
-    constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int): super(context, attributeSet, defStyleAttr)
-
-    var lisenter: ClipInterface? = null
+    var lisenter: OnClipInterface? = null
 
     override fun onTextContextMenuItem(id: Int): Boolean {
-        when(id) {
+        when (id) {
             //剪切复制黏贴
             android.R.id.cut -> lisenter?.onCut();
             android.R.id.copy -> lisenter?.onCopy();
@@ -27,7 +25,7 @@ open class ListenPasteEditTextTest : AppCompatEditText {
     }
 }
 
-interface ClipInterface{
+interface OnClipInterface {
     fun onCut()
     fun onCopy()
     fun onPaste()

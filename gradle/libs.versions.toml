@@ -2,50 +2,38 @@
 agp = "8.3.1"
 brvah = "4.1.0"
 eventbusVersion = "3.3.1"
-koinAndroid = "3.2.0"
-koinAnnotations = "1.2.0"
-koinCore = "3.2.0"
-koinKspCompiler = "1.2.0"
-therouterApt = "1.2.1"
+therouterApt = "1.2.2"
 coil = "2.5.0"
 guolindevPermissionx = "1.8.1"
-kotlinxCoroutinesAndroidVersion = "1.7.3"
+kotlinxCoroutinesAndroidVersion = "1.8.1"
 kotlinxCoroutinesCoreVersion = "1.7.3"
-lifecycleViewmodelKtx = "2.6.2"
+lifecycleViewmodelKtx = "2.8.5"
 mavenPublish = "0.28.0"
-ksp = "1.9.0-1.0.13"
-kotlin = "1.9.0"
-coreKtx = "1.12.0"
+kotlin = "2.1.0"
+ksp = "2.1.0-1.0.29"
+coreKtx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-appcompat = "1.6.1"
-material = "1.10.0"
-activity = "1.8.0"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.9.2"
 constraintlayout = "2.1.4"
-converterMoshi = "3.2.0"
 moshiKotlinCodegen = "1.15.0"
-moshiKotlin = "1.14.0"
 okhttp = "4.12.0"
-gson = "2.10.1"
 immersionbar = "3.2.2"
 refreshLayout = "2.1.0"
-therouter = "1.2.1"
+therouter = "1.2.2"
 xpopup = "2.9.19"
 pictureselector = "v3.11.2"
 rxhttpVersion = "3.3.0"
-baserecyclerviewadapterhelper4 = "4.1.0"
-
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 brvah = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "brvah" }
 greenrobot-eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbusVersion" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinKspCompiler" }
+
 therouter-apt = { module = "cn.therouter:apt", version.ref = "therouterApt" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
@@ -59,9 +47,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-converter-moshi = { group = "com.github.liujingxing.rxhttp", name = "converter-moshi", version.ref = "converterMoshi" }
 moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 immersionbar = { group = "com.geyifeng.immersionbar", name = "immersionbar", version.ref = "immersionbar" }
 immersionbar-ktx = { group = "com.geyifeng.immersionbar", name = "immersionbar-ktx", version.ref = "immersionbar" }
 refresh-layout-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refreshLayout" }
@@ -76,10 +62,7 @@ refresh-header-classics = { module = "io.github.scwang90:refresh-header-classics
 github-rxhttp = { module = "com.github.liujingxing.rxhttp:rxhttp", version.ref = "rxhttpVersion" }
 rxhttp-compiler = { module = "com.github.liujingxing.rxhttp:rxhttp-compiler", version.ref = "rxhttpVersion" }
 rxhttp-converter-moshi = { module = "com.github.liujingxing.rxhttp:converter-moshi", version.ref = "rxhttpVersion" }
-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
-baserecyclerviewadapterhelper4 = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "baserecyclerviewadapterhelper4" }
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

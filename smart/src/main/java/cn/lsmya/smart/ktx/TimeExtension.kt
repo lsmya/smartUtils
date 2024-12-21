@@ -125,3 +125,63 @@ fun Long?.millis2FitTimeSpan(precision: Int): String? {
 private fun getSimpleDateFormat(pattern: String): SimpleDateFormat {
     return SimpleDateFormat(pattern)
 }
+
+/**
+ * 获取今天0点时间
+ */
+fun getTodayFirstTime(): Long {
+    val c = Calendar.getInstance()
+    c[Calendar.HOUR_OF_DAY] = 0
+    c[Calendar.MINUTE] = 0
+    c[Calendar.SECOND] = 0
+    c[Calendar.MILLISECOND] = 0
+    return c.timeInMillis
+}
+
+/**
+ * 获取传入时间0点时间
+ */
+fun Long.getCurrentFirstTime(): Long {
+    val c = Calendar.getInstance()
+    c.time = Date(this)
+    c[Calendar.HOUR_OF_DAY] = 0
+    c[Calendar.MINUTE] = 0
+    c[Calendar.SECOND] = 0
+    c[Calendar.MILLISECOND] = 0
+    return c.timeInMillis
+}
+
+/**
+ * 获取传入时间月份第一天
+ */
+fun getFirstDayDateOfMonth(date: Date?): Date {
+    // 获取指定日期所在月的第一天
+    val calendar = Calendar.getInstance()
+    // 设置指定日期
+    calendar.time = date
+    calendar[calendar[Calendar.YEAR], calendar[Calendar.MONTH]] = 1
+    calendar[Calendar.HOUR_OF_DAY] = 0
+    calendar[Calendar.MINUTE] = 0
+    calendar[Calendar.SECOND] = 0
+    calendar[Calendar.MILLISECOND] = 0
+
+    return calendar.time
+}
+
+/**
+ * 获取当前月最后一天最后一秒
+ */
+fun Long.getLastDayOfMonth(): Date {
+    // 获取指定日期所在月的最后一天
+    val calendar = Calendar.getInstance()
+    // 设置指定日期
+    calendar.time = Date(this)
+    calendar[calendar[Calendar.YEAR], calendar[Calendar.MONTH]] = 1
+    // 最后一天
+    calendar.roll(Calendar.DATE, -1)
+    calendar[Calendar.HOUR_OF_DAY] = 0
+    calendar[Calendar.MINUTE] = 0
+    calendar[Calendar.SECOND] = 0
+    calendar[Calendar.MILLISECOND] = 0
+    return calendar.time
+}

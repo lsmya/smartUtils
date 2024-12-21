@@ -72,7 +72,7 @@ public class AppCacheUtils {
      * @param fileSize
      * @return
      */
-    private String formatFileSize(long fileSize) {
+    public String formatFileSize(long fileSize) {
         DecimalFormat df = new DecimalFormat("#0.00");//表示小数点前至少一位,0也会显示,后保留两位
         String fileSizeString = "";
         if (fileSize < 1024) {
@@ -133,6 +133,7 @@ public class AppCacheUtils {
 
     public interface OnClearCacheFolderListener {
         void onSuccess();
+
         void onFail(Exception e);
     }
 }

@@ -45,21 +45,15 @@ dependencies {
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
     implementation project(':smart')
-    implementation project(':mvvm')
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
     implementation(libs.therouter)
     ksp(libs.therouter.apt)
 
-    implementation libs.koin.core
-    implementation libs.koin.android
-    implementation(libs.koin.annotations)
     implementation(libs.refresh.layout.kernel)
     implementation(libs.refresh.header.classics)
     implementation(libs.refresh.footer.classics)
-    ksp(libs.koin.ksp.compiler)
-
 
     //网络请求（https://github.com/liujingxing/rxhttp）
     implementation(libs.okhttp)
@@ -69,9 +63,7 @@ dependencies {
     ksp(libs.rxhttp.compiler)
     ksp(libs.moshi.kotlin.codegen)
 
-    implementation(libs.baserecyclerviewadapterhelper4)
+    implementation(libs.brvah)
     implementation(libs.xpopup)
-
-    implementation("io.lindstrom:m3u8-parser:0.28")
 
 }

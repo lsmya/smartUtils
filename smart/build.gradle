@@ -41,7 +41,7 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.material
     //json解析
-    implementation libs.converter.moshi
+    implementation libs.rxhttp.converter.moshi
     ksp libs.moshi.kotlin.codegen
     //弹窗（https://github.com/li-xiaojun/XPopup）
     implementation libs.xpopup

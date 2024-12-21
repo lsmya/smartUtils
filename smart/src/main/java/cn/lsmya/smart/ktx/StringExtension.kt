@@ -1,5 +1,7 @@
 package cn.lsmya.smart.ktx
 
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.util.regex.Pattern
 
 public fun CharSequence?.isNotNullOrEmpty(): Boolean {
@@ -60,4 +62,33 @@ fun String?.checkPhoneNumber(): Boolean {
     val pattern = Pattern.compile("^1[0-9]{10}$")
     val matcher = pattern.matcher(this)
     return matcher.matches()
+}
+
+/**
+ * 计算字符串的md5
+ */
+fun String?.encodeMd5(): String? {
+    if (this.isNullOrEmpty()) return null
+    try {
+        //获取md5加密对象
+        val instance: MessageDigest = MessageDigest.getInstance("MD5")
+        //对字符串加密，返回字节数组
+        val digest: ByteArray = instance.digest(this.toByteArray())
+        val sb = StringBuffer()
+        for (b in digest) {
+            //获取低八位有效值
+            val i = b.toInt() and 0xff
+            //将整数转化为16进制
+            var hexString = Integer.toHexString(i)
+            if (hexString.length < 2) {
+                //如果是一位的话，补0
+                hexString = "0$hexString"
+            }
+            sb.append(hexString)
+        }
+        return sb.toString()
+    } catch (e: NoSuchAlgorithmException) {
+        e.printStackTrace()
+    }
+    return null
 }

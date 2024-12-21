@@ -2,7 +2,6 @@ package cn.lsmya.smart.ktx
 
 import android.content.Context
 import android.net.Uri
-import cn.lsmya.smart.utils.ImageUriPathUtil
 import com.luck.picture.lib.basic.PictureSelectionCameraModel
 import com.luck.picture.lib.basic.PictureSelectionModel
 import com.luck.picture.lib.config.PictureMimeType
@@ -25,8 +24,9 @@ internal fun PictureSelectionModel.callback(
                             list.add(filePath)
                         } else {
                             val uri = Uri.parse(filePath)
-                            val path = ImageUriPathUtil.getPathFromUri(context, uri)
-                            list.add(path)
+                            uri.toPath(context)?.let { path ->
+                                list.add(path)
+                            }
                         }
                     } else {
                         list.add(filePath)
@@ -59,9 +59,9 @@ internal fun PictureSelectionCameraModel.callback(
                             list.add(filePath)
                         } else {
                             val uri = Uri.parse(filePath)
-                            val path =
-                                ImageUriPathUtil.getPathFromUri(context, uri)
-                            list.add(path)
+                            uri.toPath(context)?.let { path ->
+                                list.add(path)
+                            }
                         }
                     } else {
                         list.add(filePath)

@@ -2,7 +2,6 @@ package cn.lsmya.smart.utils
 
 import android.content.Context
 import android.net.Uri
-import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.engine.CompressFileEngine
 import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener
 import com.luck.picture.lib.utils.DateUtils
@@ -21,11 +20,11 @@ internal class ImageFileCompressEngine: CompressFileEngine {
             val postfix =
                 if (indexOf != -1) filePath.substring(indexOf) else ".jpg"
             DateUtils.getCreateFileName("CMP_") + postfix
-        }.filter { path: String? ->
-            if (PictureMimeType.isUrlHasImage(path) && !PictureMimeType.isHasHttp(path)) {
-                return@filter true
-            }
-            !PictureMimeType.isUrlHasGif(path)
+//        }.filter { path: String? ->
+//            if (PictureMimeType.isUrlHasImage(path) && !PictureMimeType.isHasHttp(path)) {
+//                return@filter true
+//            }
+//            !PictureMimeType.isUrlHasGif(path)
         }.setCompressListener(object : OnNewCompressListener {
             override fun onStart() {
             }

@@ -32,7 +32,7 @@ import java.util.TimerTask
  */
 class VerificationCodeInputText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ViewGroup(context, attrs, defStyleAttr), ClipInterface {
+) : ViewGroup(context, attrs, defStyleAttr), OnClipInterface {
 
     private var boxNumber = 4
     private var boxHeight = 150
@@ -320,7 +320,7 @@ class VerificationCodeInputText @JvmOverloads constructor(
         return ""
     }
 
-    fun setOnVerCideListener(listener: VerCideListener) {
+    fun setOnVerCodeListener(listener: VerCideListener) {
         this.listener = listener
 
     }

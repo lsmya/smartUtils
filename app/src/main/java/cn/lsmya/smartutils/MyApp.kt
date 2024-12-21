@@ -8,15 +8,11 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.CoroutineExceptionHandler
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
-import org.koin.ksp.generated.module
 import rxhttp.RxHttpPlugins
 import rxhttp.wrapper.converter.MoshiConverter
 import rxhttp.wrapper.ssl.HttpsUtils
 
-class MyApp : Application() {
+class MyApp : Application(){
 
     init {
         //设置全局的Header构建器
@@ -39,11 +35,6 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidLogger()
-            androidContext(this@MyApp)
-            modules(appModule, AppModule().module)
-        }
         initNetwork()
         SmartSdkConfig.setCoroutineExceptionHandler(mCoroutineExceptionHandler)
     }
