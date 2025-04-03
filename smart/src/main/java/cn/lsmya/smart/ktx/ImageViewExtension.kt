@@ -3,11 +3,41 @@ package cn.lsmya.smart.ktx
 import android.graphics.drawable.Drawable
 import android.util.Base64
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import coil.decode.SvgDecoder
 import coil.load
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
+
+fun ImageView?.loadUrl(
+    placeholder: Drawable? = null,
+    error: Drawable? = null,
+    isCircle: Boolean? = null,
+    radius: Float? = null,
+    topLeft: Float? = null,
+    topRight: Float? = null,
+    bottomLeft: Float? = null,
+    bottomRight: Float? = null,
+    @DrawableRes defaultImage: Int? = null,
+) {
+    if (this == null) {
+        return
+    }
+    loadUrl(
+        imageUrl = null,
+        baseUrl = null,
+        placeholder = placeholder,
+        error = error,
+        isCircle = isCircle,
+        radius = radius,
+        topLeft = topLeft,
+        topRight = topRight,
+        bottomLeft = bottomLeft,
+        bottomRight = bottomRight,
+        defaultImage = defaultImage?.let(context::getDrawable)
+    )
+}
 
 fun ImageView?.loadUrl(
     imageUrl: String?,

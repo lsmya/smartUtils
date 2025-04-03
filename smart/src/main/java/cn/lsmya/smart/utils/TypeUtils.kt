@@ -3,7 +3,7 @@ package cn.lsmya.smart.utils
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
-internal fun getBindingType(clazz: Class<*>): Class<*>? {
+fun getBindingType(clazz: Class<*>): Class<*>? {
     val superclass = clazz.genericSuperclass
     if (superclass is ParameterizedType) {
         //返回表示此类型实际类型参数的 Type 对象的数组

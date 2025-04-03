@@ -1,7 +1,7 @@
 package cn.lsmya.smartutils
 
 import android.app.Application
-import cn.lsmya.smart.SmartSdkConfig
+import cn.lsmya.smart.CoroutineExceptionConfig
 import cn.lsmya.smart.ktx.moshi
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -36,7 +36,7 @@ class MyApp : Application(){
     override fun onCreate() {
         super.onCreate()
         initNetwork()
-        SmartSdkConfig.setCoroutineExceptionHandler(mCoroutineExceptionHandler)
+        CoroutineExceptionConfig.setCoroutineExceptionHandler(mCoroutineExceptionHandler)
     }
 
     private val mCoroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->

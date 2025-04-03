@@ -7,7 +7,6 @@ coil = "2.5.0"
 guolindevPermissionx = "1.8.1"
 kotlinxCoroutinesAndroidVersion = "1.8.1"
 kotlinxCoroutinesCoreVersion = "1.7.3"
-lifecycleViewmodelKtx = "2.8.5"
 mavenPublish = "0.28.0"
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
@@ -30,7 +29,6 @@ rxhttpVersion = "3.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 brvah = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper4", version.ref = "brvah" }
 greenrobot-eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbusVersion" }
 

@@ -2,7 +2,7 @@ package cn.lsmya.smart
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 
-object SmartSdkConfig {
+object CoroutineExceptionConfig {
     private var mCoroutineExceptionHandler: CoroutineExceptionHandler? = null
     fun setCoroutineExceptionHandler(handler: CoroutineExceptionHandler) {
         mCoroutineExceptionHandler = handler

@@ -3,7 +3,7 @@ package cn.lsmya.smart.ktx
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
-import cn.lsmya.smart.SmartSdkConfig
+import cn.lsmya.smart.CoroutineExceptionConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
@@ -31,7 +31,7 @@ fun Fragment.launch(
         } catch (e: Throwable) {
             if (isActive) {
                 onError?.invoke(e)
-                SmartSdkConfig.getCoroutineExceptionHandler()
+                CoroutineExceptionConfig.getCoroutineExceptionHandler()
                     ?.handleException(this.coroutineContext, e)
             }
         } finally {
@@ -62,7 +62,7 @@ fun FragmentActivity.launch(
             if (isActive) {
                 try {
                     onError?.invoke(e)
-                    SmartSdkConfig.getCoroutineExceptionHandler()
+                    CoroutineExceptionConfig.getCoroutineExceptionHandler()
                         ?.handleException(this.coroutineContext, e)
                 } catch (e: Throwable) {
                     e.printStackTrace()
