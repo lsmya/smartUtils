@@ -12,7 +12,8 @@ import android.widget.Checkable
 fun View.height(height: Int): View {
     val params = layoutParams ?: ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT)
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
     params.height = height
     layoutParams = params
     return this
@@ -27,7 +28,8 @@ fun View.height(height: Int): View {
 fun View.limitHeight(h: Int, min: Int, max: Int): View {
     val params = layoutParams ?: ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT)
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
     when {
         h < min -> params.height = min
         h > max -> params.height = max
@@ -41,8 +43,10 @@ fun View.limitHeight(h: Int, min: Int, max: Int): View {
  * 设置View的宽度
  */
 fun View.width(width: Int): View {
-    val params = layoutParams ?: ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT)
+    val params = layoutParams ?: ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
     params.width = width
     layoutParams = params
     return this
@@ -55,8 +59,10 @@ fun View.width(width: Int): View {
  * @param max 最大宽度
  */
 fun View.limitWidth(w: Int, min: Int, max: Int): View {
-    val params = layoutParams ?: ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT)
+    val params = layoutParams ?: ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
     when {
         w < min -> params.width = min
         w > max -> params.width = max
@@ -72,8 +78,10 @@ fun View.limitWidth(w: Int, min: Int, max: Int): View {
  * @param height 要设置的高度
  */
 fun View.widthAndHeight(width: Int, height: Int): View {
-    val params = layoutParams ?: ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT)
+    val params = layoutParams ?: ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
     params.width = width
     params.height = height
     layoutParams = params
@@ -87,7 +95,12 @@ fun View.widthAndHeight(width: Int, height: Int): View {
  * @param rightMargin 默认是保留原来的
  * @param bottomMargin 默认是保留原来的
  */
-fun View.margin(leftMargin: Int = Int.MAX_VALUE, topMargin: Int = Int.MAX_VALUE, rightMargin: Int = Int.MAX_VALUE, bottomMargin: Int = Int.MAX_VALUE): View {
+fun View.margin(
+    leftMargin: Int = Int.MAX_VALUE,
+    topMargin: Int = Int.MAX_VALUE,
+    rightMargin: Int = Int.MAX_VALUE,
+    bottomMargin: Int = Int.MAX_VALUE
+): View {
     val params = layoutParams as ViewGroup.MarginLayoutParams
     if (leftMargin != Int.MAX_VALUE)
         params.leftMargin = leftMargin
@@ -100,6 +113,7 @@ fun View.margin(leftMargin: Int = Int.MAX_VALUE, topMargin: Int = Int.MAX_VALUE,
     layoutParams = params
     return this
 }
+
 /**
  * 切换View的可见性
  */
@@ -160,6 +174,7 @@ fun View?.visibleOrInvisible(boolean: Boolean) {
         this.invisible()
     }
 }
+
 /**
  * @param boolean 隐藏控件
  */
@@ -170,6 +185,7 @@ fun View?.invisibleOrGone(boolean: Boolean) {
         this.invisible()
     }
 }
+
 /**
  * 通过布局文件获取[View]实例
  *

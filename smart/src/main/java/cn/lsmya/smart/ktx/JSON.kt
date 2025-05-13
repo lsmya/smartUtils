@@ -15,7 +15,14 @@ val moshi = Moshi.Builder()
     .build()
 
 fun Any.toJsonByGson(): String = Gson().toJson(this)
-fun Any.toJson(): String = moshi.adapter(this.javaClass).toJson(this)
+fun Any.toJsonByMoshi(): String = moshi.adapter(this.javaClass).toJson(this)
+fun Any.toJson(): String {
+    return if (this::class.java.isAnnotationPresent(JsonClass::class.java)) {
+        this.toJsonByMoshi()
+    } else {
+        this.toJsonByGson()
+    }
+}
 
 fun <T> String.fromJson(classOfT: Class<T>): T = moshi.adapter(classOfT).fromJson(this)!!
 
@@ -72,6 +79,7 @@ object Null_To_INT_0_Adapter {
     }
 
 }
+
 object Null_To_LONG_0_Adapter {
     @FromJson
     fun fromJson(reader: JsonReader?): Long {

@@ -1,6 +1,8 @@
 package cn.lsmya.smart.utils
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.ImageView
@@ -26,7 +28,7 @@ internal class ImageFileCropEngine : CropFileEngine {
         uCrop.withOptions(options)
         uCrop.setImageEngine(object : UCropImageEngine {
             override fun loadImage(context: Context, url: String, imageView: ImageView) {
-                if (!ImageLoaderUtils.assertValidRequest(context)) {
+                if (!assertValidRequest(context)) {
                     return
                 }
                 imageView.load(url) {
@@ -51,5 +53,24 @@ internal class ImageFileCropEngine : CropFileEngine {
             }
         })
         uCrop.start(fragment!!.requireActivity(), fragment, requestCode)
+    }
+
+    private fun assertValidRequest(context: Context?): Boolean {
+        if (context is Activity) {
+            return !isDestroy(context)
+        } else if (context is ContextWrapper) {
+            if (context.baseContext is Activity) {
+                val activity = context.baseContext as Activity
+                return !isDestroy(activity)
+            }
+        }
+        return true
+    }
+
+    private fun isDestroy(activity: Activity?): Boolean {
+        if (activity == null) {
+            return true
+        }
+        return activity.isFinishing || activity.isDestroyed
     }
 }

@@ -60,6 +60,7 @@ private fun log(method: Int, tag: String?, any: Any?, stackTraceIndex: Int) {
                 append(")#")
                 append(methodName)
                 append("=============================================================================")
+                append("\n ")
             }
             print(method, mTag, msgHead)
             val maxStrLength = 2001 - mTag.length
@@ -69,6 +70,7 @@ private fun log(method: Int, tag: String?, any: Any?, stackTraceIndex: Int) {
             }
             print(method, mTag, logMsg)
             val foot = buildString {
+                append(" \n")
                 append("╚====================(")
                 append(fileName)
                 append(":")

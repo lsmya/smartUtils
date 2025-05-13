@@ -9,7 +9,7 @@ import top.zibin.luban.Luban
 import top.zibin.luban.OnNewCompressListener
 import java.io.File
 
-internal class ImageFileCompressEngine: CompressFileEngine {
+internal class ImageFileCompressEngine : CompressFileEngine {
     override fun onStartCompress(
         context: Context?,
         source: ArrayList<Uri>?,
@@ -20,11 +20,6 @@ internal class ImageFileCompressEngine: CompressFileEngine {
             val postfix =
                 if (indexOf != -1) filePath.substring(indexOf) else ".jpg"
             DateUtils.getCreateFileName("CMP_") + postfix
-//        }.filter { path: String? ->
-//            if (PictureMimeType.isUrlHasImage(path) && !PictureMimeType.isHasHttp(path)) {
-//                return@filter true
-//            }
-//            !PictureMimeType.isUrlHasGif(path)
         }.setCompressListener(object : OnNewCompressListener {
             override fun onStart() {
             }

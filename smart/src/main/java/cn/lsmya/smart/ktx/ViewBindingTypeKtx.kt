@@ -1,10 +1,10 @@
-package cn.lsmya.smart.utils
+package cn.lsmya.smart.ktx
 
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
-fun getBindingType(clazz: Class<*>): Class<*>? {
-    val superclass = clazz.genericSuperclass
+internal fun Any.getBindingType(): Class<*>? {
+    val superclass = javaClass.genericSuperclass
     if (superclass is ParameterizedType) {
         //返回表示此类型实际类型参数的 Type 对象的数组
         val actualTypeArguments = superclass.actualTypeArguments

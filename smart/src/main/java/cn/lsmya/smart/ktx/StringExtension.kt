@@ -4,11 +4,13 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.regex.Pattern
 
-public fun CharSequence?.isNotNullOrEmpty(): Boolean {
+fun String.format(vararg args: Any) = if (args.isNotEmpty()) String.format(this, *args) else this
+
+fun CharSequence?.isNotNullOrEmpty(): Boolean {
     return !this.isNullOrEmpty()
 }
 
-public fun CharSequence?.replaceAll(oldValue: String, newValue: String): String {
+fun CharSequence?.replaceAll(oldValue: String, newValue: String): String {
     return if (this == null) {
         ""
     } else {
@@ -22,7 +24,7 @@ public fun CharSequence?.replaceAll(oldValue: String, newValue: String): String 
 
 @SinceKotlin("1.3")
 @Suppress("BOUNDS_NOT_ALLOWED_IF_BOUNDED_BY_TYPE_PARAMETER")
-public inline fun <C, R> C?.ifNullOrEmpty(defaultValue: () -> R): R where C : CharSequence, C : R =
+inline fun <C, R> C?.ifNullOrEmpty(defaultValue: () -> R): R where C : CharSequence, C : R =
     if (isNullOrEmpty()) defaultValue() else this
 
 

@@ -2,6 +2,8 @@ package cn.lsmya.smart.ktx
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import cn.lsmya.smart.utils.CoilEngine
 import cn.lsmya.smart.utils.ImageFileCompressEngine
@@ -9,6 +11,7 @@ import cn.lsmya.smart.utils.ImageFileCropEngine
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
+import com.luck.picture.lib.interfaces.OnRecordAudioInterceptListener
 
 /**
  * 拍照
@@ -49,11 +52,45 @@ fun Activity.openCameraOfVideo(
 }
 
 /**
+ * 录制音频
+ * @param cancel 取消回调
+ * @param callback 选择完成回调
+ */
+fun Activity.openRecordOfAudio(
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
+    cancel: (() -> Unit)? = null,
+    callback: ((String) -> Unit),
+) {
+    PictureSelector.create(this)
+        .openCamera(SelectMimeType.ofAudio())
+        .apply {
+            if (onReOnRecordAudioInterceptListener == null) {
+                setRecordAudioInterceptListener { fragment, requestCode ->
+                    val intent = Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION)
+                    fragment.startActivityForResult(intent, requestCode)
+                }
+            } else {
+                setRecordAudioInterceptListener(onReOnRecordAudioInterceptListener)
+            }
+        }
+        .callback(context = this, cancel = cancel, callback = {
+            if (it.isNotEmpty()) {
+                callback.invoke(it[0])
+            }
+        })
+}
+
+/**
  * 选择图片(单选)
+ * @param enableCrop 是否裁剪
+ * @param enableCompress 是否压缩
+ * @param cancel 取消回调
+ * @param callback 选择完成回调
  */
 fun Activity.selectSingleImage(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean,
     cancel: (() -> Unit)? = null,
     callback: ((String) -> Unit),
 ) {
@@ -63,6 +100,7 @@ fun Activity.selectSingleImage(
         selectionMode = SelectModeConfig.SINGLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
         cancel = cancel,
         callback = {
             if (it.isNotEmpty()) {
@@ -77,6 +115,7 @@ fun Activity.selectSingleImage(
 fun Activity.selectSingleVideo(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean,
     cancel: (() -> Unit)? = null,
     callback: ((String) -> Unit),
 ) {
@@ -86,6 +125,34 @@ fun Activity.selectSingleVideo(
         selectionMode = SelectModeConfig.SINGLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
+        cancel = cancel,
+        callback = {
+            if (it.isNotEmpty()) {
+                callback.invoke(it[0])
+            }
+        })
+}
+
+/**
+ * 选择音频(单选)
+ * @param cancel 取消回调
+ * @param callback 选择完成回调
+ */
+fun Activity.selectSingleAudio(
+    isDisplayCamera: Boolean = false,
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
+    cancel: (() -> Unit)? = null,
+    callback: ((String) -> Unit),
+) {
+    pictureSelector(
+        context = this,
+        chooseMode = SelectMimeType.ofAudio(),
+        selectionMode = SelectModeConfig.SINGLE,
+        enableCrop = false,
+        enableCompress = false,
+        isDisplayCamera = isDisplayCamera,
+        onReOnRecordAudioInterceptListener = onReOnRecordAudioInterceptListener,
         cancel = cancel,
         callback = {
             if (it.isNotEmpty()) {
@@ -100,6 +167,7 @@ fun Activity.selectSingleVideo(
 fun Activity.selectMultipleImage(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean = false,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit)
 ) {
@@ -109,6 +177,7 @@ fun Activity.selectMultipleImage(
         selectionMode = SelectModeConfig.MULTIPLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
         cancel = cancel,
         callback = callback,
     )
@@ -120,20 +189,45 @@ fun Activity.selectMultipleImage(
 fun Activity.selectMultipleVideo(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean = false,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit)
 ) {
     pictureSelector(
         context = this,
         chooseMode = SelectMimeType.ofVideo(),
-        selectionMode = SelectModeConfig.SINGLE,
+        selectionMode = SelectModeConfig.MULTIPLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
         cancel = cancel,
         callback = callback
     )
 }
 
+/**
+ * 选择音频(多选)
+ * @param cancel 取消回调
+ * @param callback 选择完成回调
+ */
+fun Activity.selectMultipleAudio(
+    isDisplayCamera: Boolean = false,
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
+    cancel: (() -> Unit)? = null,
+    callback: ((ArrayList<String>) -> Unit),
+) {
+    pictureSelector(
+        context = this,
+        chooseMode = SelectMimeType.ofAudio(),
+        selectionMode = SelectModeConfig.MULTIPLE,
+        enableCrop = false,
+        enableCompress = false,
+        isDisplayCamera = isDisplayCamera,
+        onReOnRecordAudioInterceptListener = onReOnRecordAudioInterceptListener,
+        cancel = cancel,
+        callback = callback
+    )
+}
 
 /**
  * 拍照
@@ -174,11 +268,41 @@ fun Fragment.openCameraOfVideo(
 }
 
 /**
+ * 录制音频
+ * @param cancel 取消回调
+ * @param callback 选择完成回调
+ */
+fun Fragment.openRecordOfAudio(
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
+    cancel: (() -> Unit)? = null,
+    callback: ((String) -> Unit),
+) {
+    PictureSelector.create(this)
+        .openCamera(SelectMimeType.ofAudio())
+        .apply {
+            if (onReOnRecordAudioInterceptListener == null) {
+                setRecordAudioInterceptListener { fragment, requestCode ->
+                    val intent = Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION)
+                    fragment.startActivityForResult(intent, requestCode)
+                }
+            } else {
+                setRecordAudioInterceptListener(onReOnRecordAudioInterceptListener)
+            }
+        }
+        .callback(context = requireContext(), cancel = cancel, callback = {
+            if (it.isNotEmpty()) {
+                callback.invoke(it[0])
+            }
+        })
+}
+
+/**
  * 选择图片(单选)
  */
 fun Fragment.selectSingleImage(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean = false,
     cancel: (() -> Unit)? = null,
     callback: ((String) -> Unit),
 ) {
@@ -188,6 +312,7 @@ fun Fragment.selectSingleImage(
         selectionMode = SelectModeConfig.SINGLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
         cancel = cancel,
         callback = {
             if (it.isNotEmpty()) {
@@ -202,6 +327,7 @@ fun Fragment.selectSingleImage(
 fun Fragment.selectSingleVideo(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean = false,
     cancel: (() -> Unit)? = null,
     callback: ((String) -> Unit),
 ) {
@@ -211,6 +337,32 @@ fun Fragment.selectSingleVideo(
         selectionMode = SelectModeConfig.SINGLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
+        cancel = cancel,
+        callback = {
+            if (it.isNotEmpty()) {
+                callback.invoke(it[0])
+            }
+        })
+}
+
+/**
+ * 选择音频(单选)
+ */
+fun Fragment.selectSingleAudio(
+    isDisplayCamera: Boolean = false,
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
+    cancel: (() -> Unit)? = null,
+    callback: ((String) -> Unit),
+) {
+    pictureSelector(
+        context = requireContext(),
+        chooseMode = SelectMimeType.ofAudio(),
+        selectionMode = SelectModeConfig.SINGLE,
+        enableCrop = false,
+        enableCompress = false,
+        isDisplayCamera = isDisplayCamera,
+        onReOnRecordAudioInterceptListener = onReOnRecordAudioInterceptListener,
         cancel = cancel,
         callback = {
             if (it.isNotEmpty()) {
@@ -225,6 +377,7 @@ fun Fragment.selectSingleVideo(
 fun Fragment.selectMultipleImage(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean = false,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit)
 ) {
@@ -234,6 +387,7 @@ fun Fragment.selectMultipleImage(
         selectionMode = SelectModeConfig.MULTIPLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
         cancel = cancel,
         callback = callback,
     )
@@ -245,6 +399,7 @@ fun Fragment.selectMultipleImage(
 fun Fragment.selectMultipleVideo(
     enableCrop: Boolean = false,
     enableCompress: Boolean = false,
+    isDisplayCamera: Boolean = false,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit)
 ) {
@@ -254,6 +409,31 @@ fun Fragment.selectMultipleVideo(
         selectionMode = SelectModeConfig.SINGLE,
         enableCrop = enableCrop,
         enableCompress = enableCompress,
+        isDisplayCamera = isDisplayCamera,
+        cancel = cancel,
+        callback = callback
+    )
+}
+
+/**
+ * 选择音频(多选)
+ * @param cancel 取消回调
+ * @param callback 选择完成回调
+ */
+fun Fragment.selectMultipleAudio(
+    isDisplayCamera: Boolean = false,
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
+    cancel: (() -> Unit)? = null,
+    callback: ((ArrayList<String>) -> Unit),
+) {
+    pictureSelector(
+        context = requireContext(),
+        chooseMode = SelectMimeType.ofAudio(),
+        selectionMode = SelectModeConfig.MULTIPLE,
+        enableCrop = false,
+        enableCompress = false,
+        isDisplayCamera = isDisplayCamera,
+        onReOnRecordAudioInterceptListener = onReOnRecordAudioInterceptListener,
         cancel = cancel,
         callback = callback
     )
@@ -265,6 +445,7 @@ fun Fragment.selectMultipleVideo(
  * @param selectionMode 选择模式  单选、多选
  * @param enableCrop 是否裁剪
  * @param enableCompress 是否压缩
+ * @param isDisplayCamera 是否显示相机
  * @param cancel 取消回调
  * @param callback 成功回调
  */
@@ -274,6 +455,8 @@ private fun pictureSelector(
     selectionMode: Int,
     enableCrop: Boolean,
     enableCompress: Boolean,
+    isDisplayCamera: Boolean,
+    onReOnRecordAudioInterceptListener: OnRecordAudioInterceptListener? = null,
     cancel: (() -> Unit)? = null,
     callback: ((ArrayList<String>) -> Unit),
 ) {
@@ -281,11 +464,22 @@ private fun pictureSelector(
         .openGallery(chooseMode)
         .isAutomaticTitleRecyclerTop(true)
         .setSelectionMode(selectionMode)
+        .isDisplayCamera(isDisplayCamera)
         .setImageEngine(CoilEngine())
         .isDirectReturnSingle(true)
         .apply {
             if (enableCrop) setCropEngine(ImageFileCropEngine())
             if (enableCompress) setCompressEngine(ImageFileCompressEngine())
+            if (chooseMode == SelectMimeType.ofAudio()) {
+                if (onReOnRecordAudioInterceptListener == null) {
+                    setRecordAudioInterceptListener { fragment, requestCode ->
+                        val intent = Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION)
+                        fragment.startActivityForResult(intent, requestCode)
+                    }
+                } else {
+                    setRecordAudioInterceptListener(onReOnRecordAudioInterceptListener)
+                }
+            }
         }
         .callback(context = context, cancel = cancel, callback = callback)
 }

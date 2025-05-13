@@ -12,18 +12,18 @@ import com.lxj.xpopup.util.SmartGlideImageLoader
  * 显示大图
  */
 fun Activity.showBigImage(position: Int, view: View?, images: List<String>?) {
-    showBigImage(this, position, view, images)
+    this.showImage(position, view, images)
 }
 
 /**
  * 显示大图
  */
 fun Fragment.showBigImage(position: Int, view: View?, images: List<String>?) {
-    showBigImage(requireContext(), position, view, images)
+    requireContext().showImage(position, view, images)
 }
 
-private fun showBigImage(context: Context, position: Int, view: View?, images: List<String>?) {
-    XPopup.Builder(context)
+private fun Context.showImage(position: Int, view: View?, images: List<String>?) {
+    XPopup.Builder(this)
         .isDestroyOnDismiss(true)
         .asImageViewer(
             if (view is ImageView) view else null,

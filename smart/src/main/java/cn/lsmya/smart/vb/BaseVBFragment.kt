@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import cn.lsmya.smart.base.BaseFragment
-import cn.lsmya.smart.utils.getBindingType
+import cn.lsmya.smart.ktx.getBindingType
 
 abstract class BaseVBFragment<VB : ViewBinding> : BaseFragment() {
 
@@ -27,7 +27,7 @@ abstract class BaseVBFragment<VB : ViewBinding> : BaseFragment() {
         return viewBinding?.root
     }
     private fun createDataBinding(inflater: LayoutInflater, container: ViewGroup?): VB {
-        return getBindingType(javaClass)// 获取泛型类型
+        return getBindingType()// 获取泛型类型
             ?.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java) // 反射获取 inflate 方法
             ?.invoke(null, inflater, container, false) as VB // 通过反射调用 inflate 方法
     }
