@@ -1,17 +1,24 @@
 package cn.lsmya.smart.ktx
 
 import com.google.gson.Gson
-import com.squareup.moshi.*
-import com.squareup.moshi.JsonAdapter.Factory
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonClass
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import java.io.IOException
 import java.lang.reflect.Type
+import java.math.BigDecimal
 
-val moshi = Moshi.Builder()
+val moshi: Moshi = Moshi.Builder()
     .add(Null_To_Empty_String_Adapter)
     .add(Null_To_INT_0_Adapter)
     .add(Null_To_LONG_0_Adapter)
     .add(Null_To_False_Adapter)
     .add(MoshiArrayListJsonAdapter.FACTORY)
+    .add(BigDecimalAdapterFactory())
     .build()
 
 fun Any.toJsonByGson(): String = Gson().toJson(this)
@@ -98,7 +105,7 @@ object Null_To_LONG_0_Adapter {
 private abstract class MoshiArrayListJsonAdapter<C : MutableCollection<T>?, T> private constructor(
     private val elementAdapter: JsonAdapter<T>
 ) :
-    com.squareup.moshi.JsonAdapter<C>() {
+    JsonAdapter<C>() {
     abstract fun newCollection(): C
 
     @Throws(IOException::class)
@@ -160,3 +167,42 @@ private abstract class MoshiArrayListJsonAdapter<C : MutableCollection<T>?, T> p
     }
 }
 
+class BigDecimalAdapterFactory : JsonAdapter.Factory {
+    override fun create(type: Type, annotations: Set<Annotation?>, moshi: Moshi): JsonAdapter<*>? {
+        if (type != BigDecimal::class.java) return null
+
+        return object : JsonAdapter<BigDecimal>() {
+            override fun fromJson(reader: JsonReader): BigDecimal? {
+                loge("${reader.peek() == JsonReader.Token.STRING}   ${reader.peek().name}")
+                return when (reader.peek()) {
+                    JsonReader.Token.NUMBER -> {
+                        val number = reader.nextDouble()
+                        BigDecimal.valueOf(number)
+                    }
+
+                    JsonReader.Token.STRING -> {
+                        val string = reader.nextString()
+                        BigDecimal(string)
+                    }
+
+                    JsonReader.Token.NULL -> {
+                        null
+                    }
+
+                    else -> {
+                        val intValue = reader.nextInt()
+                        BigDecimal(intValue)
+                    }
+                }
+            }
+
+            override fun toJson(wirtter: JsonWriter, value: BigDecimal?) {
+                if (value != null) {
+                    wirtter.value(value)
+                } else {
+                    wirtter.nullValue()
+                }
+            }
+        }.nullSafe()
+    }
+}
