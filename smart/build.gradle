@@ -46,16 +46,16 @@ dependencies {
     //弹窗（https://github.com/li-xiaojun/XPopup）
     implementation libs.xpopup
     //图片选择（https://github.com/lucksiege/pictureselector）
-    implementation(libs.pictureselector)
+    compileOnly(libs.pictureselector)
     compileOnly(libs.pictureselector.compress)
     compileOnly(libs.pictureselector.ucrop)
     compileOnly(libs.pictureselector.camerax)
     //图片加载（https://github.com/coil-kt/coil/blob/main/README-zh.md）
-    implementation libs.coil
-    implementation libs.coil.svg
+    compileOnly libs.coil
+    compileOnly libs.coil.svg
     //kotlin携程
-    implementation libs.jetbrains.kotlinx.coroutines.core
-    implementation libs.jetbrains.kotlinx.coroutines.android
+    implementation(libs.jetbrains.kotlinx.coroutines.core)
+    implementation(libs.jetbrains.kotlinx.coroutines.android)
 
     //智能刷新
     implementation libs.refresh.layout.kernel

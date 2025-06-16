@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "SmartUtils"
 include ':app'
 include ':smart'
+include ':serial_port'

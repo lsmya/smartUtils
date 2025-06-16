@@ -45,6 +45,8 @@ dependencies {
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
     implementation project(':smart')
+//    implementation("cn.lsmya:smart:1.0.12")
+    implementation project(':serial_port')
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -54,7 +56,9 @@ dependencies {
     implementation(libs.refresh.layout.kernel)
     implementation(libs.refresh.header.classics)
     implementation(libs.refresh.footer.classics)
-
+    //kotlin携程
+    implementation libs.jetbrains.kotlinx.coroutines.core
+    implementation libs.jetbrains.kotlinx.coroutines.android
     //网络请求（https://github.com/liujingxing/rxhttp）
     implementation(libs.okhttp)
 
@@ -65,5 +69,11 @@ dependencies {
 
     implementation(libs.brvah)
     implementation(libs.xpopup)
+
+
+    implementation(libs.pictureselector)
+//    implementation(libs.pictureselector.compress)
+//    implementation(libs.pictureselector.ucrop)
+//    implementation(libs.pictureselector.camerax)
 
 }

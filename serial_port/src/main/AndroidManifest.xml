@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
+    <uses-feature android:name="android.hardware.usb.host" />
+
+    <application>
+        <receiver
+            android:name=".UsbConnectReceiver"
+            android:exported="true">
+            <intent-filter>
+                <!-- usb拔出 -->
+                <action android:name="android.hardware.usb.action.USB_DEVICE_DETACHED" />
+                <!-- usb插入 -->
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
