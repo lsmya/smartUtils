@@ -26,6 +26,7 @@ therouter = "1.2.2"
 xpopup = "2.9.19"
 pictureselector = "v3.11.2"
 rxhttpVersion = "3.3.0"
+bluetooth = "1.0.0-alpha02"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +62,7 @@ github-rxhttp = { module = "com.github.liujingxing.rxhttp:rxhttp", version.ref =
 rxhttp-compiler = { module = "com.github.liujingxing.rxhttp:rxhttp-compiler", version.ref = "rxhttpVersion" }
 rxhttp-converter-moshi = { module = "com.github.liujingxing.rxhttp:converter-moshi", version.ref = "rxhttpVersion" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+androidx-bluetooth = { group = "androidx.bluetooth", name = "bluetooth", version.ref = "bluetooth" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

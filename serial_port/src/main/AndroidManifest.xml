@@ -2,19 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <uses-permission android:name="android.permission.USB_PERMISSION" />
     <uses-feature android:name="android.hardware.usb.host" />
 
-    <application>
-        <receiver
-            android:name=".UsbConnectReceiver"
-            android:exported="true">
-            <intent-filter>
-                <!-- usb拔出 -->
-                <action android:name="android.hardware.usb.action.USB_DEVICE_DETACHED" />
-                <!-- usb插入 -->
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-            </intent-filter>
-        </receiver>
-    </application>
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <!-- 请求旧设备上的旧版蓝牙权限。 -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <!-- 仅当您的应用程序查找蓝牙设备时才需要。如果您的应用程序不使用蓝牙扫描结果来获取物理数据位置信息，您可以强烈声明您的应用程序不会导出物理位置</a>。-->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <!-- 仅当您的应用程序使蓝牙设备可以发现设备时才需要。 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <!-- 仅当您的应用程序与已配对的蓝牙设备通信时才需要。-->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <!-- 仅当您的应用程序使用蓝牙扫描结果来获取物理位置时才需要。-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
 </manifest>

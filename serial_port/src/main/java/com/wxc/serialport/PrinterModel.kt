@@ -13,5 +13,9 @@ data class PrinterModel(
         fun createUsbPrinter(device: UsbDevice): PrinterModel {
             return PrinterModel(mode = PrintMode.USB, usbDevice = device)
         }
+
+        fun createNetworkPrinter(ip: String, port: Int): PrinterModel {
+            return PrinterModel(mode = PrintMode.WIFI, ip = ip, port = port)
+        }
     }
 }

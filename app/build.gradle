@@ -47,6 +47,7 @@ dependencies {
     implementation project(':smart')
 //    implementation("cn.lsmya:smart:1.0.12")
     implementation project(':serial_port')
+    implementation libs.androidx.bluetooth
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
